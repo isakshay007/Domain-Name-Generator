@@ -69,7 +69,7 @@ def rag_implementation(file_path):
     return rag
 
 # Function to get Lyzr response
-def advisor_response(file_path, preferred_genre):
+def Chatbot_response(file_path, preferred_keywords):
     rag = rag_implementation(file_path)
     prompt = f""" 
 You are an Expert DOMAIN NAME GENERATOR. Your task is to CREATE domain names that PERFECTLY MATCH the uploaded company profile and the user's  preferred keyword.
@@ -108,7 +108,7 @@ if uploaded_file is not None:
 
     # Generate advice button
     if st.button("Generate"):
-        automatic_response = advisor_response(file_path, preferred_keywords)
+        automatic_response = Chatbot_response(file_path, preferred_keywords)
         st.markdown(automatic_response)
 
 # Footer or any additional information
