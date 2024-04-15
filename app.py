@@ -22,7 +22,7 @@ st.image(image, width=150)
 # App title and introduction
 st.title(" Domain Name Generator ")
 st.markdown("### Built using Lyzr SDK🚀")
-st.markdown(" ")
+st.markdown("Generate perfect domain names tailored to your company's profile and preferred keywords with our Domain Name Generator powered by Lyzr's ChatBot.")
 
 # Function to remove existing files in the directory
 def remove_existing_files(directory):
