@@ -20,9 +20,9 @@ image = Image.open("./logo/lyzr-logo.png")
 st.image(image, width=150)
 
 # App title and introduction
-st.title("Library Assistant")
+st.title(" Domain Name Generator ")
 st.markdown("### Built using Lyzr SDK🚀")
-st.markdown("")
+st.markdown(" Generate perfect domain names tailored to your company's profile and preferred keywords with our Domain Name Generator powered by Lyzr's ChatBot.")
 
 # Function to remove existing files in the directory
 def remove_existing_files(directory):
@@ -69,31 +69,28 @@ def rag_implementation(file_path):
     return rag
 
 # Function to get Lyzr response
-def advisor_response(file_path, preferred_genre):
+def Chatbot_response(file_path, preferred_keywords):
     rag = rag_implementation(file_path)
-    prompt = f""" You are an Expert LIBRARY ASSISTANT BOT. Always introduce yourself. Your task is to ANALYZE an uploaded document and USER INPUT concerning their preferred genres. 
-                  
-                  Based on this information, you MUST RECOMMEND relevant books to the user.
-                  
-                  Here's your step-by-step guide:
+    prompt = f""" 
+You are an Expert DOMAIN NAME GENERATOR. Your task is to CREATE domain names that PERFECTLY MATCH the given company profile and incorporate user-preferred keywords.
+Here is your DETAILED INSTRUCTION SET:
 
-                  1. First, EXAMINE the uploaded documents CAREFULLY, categorizing them accordingly in a tabular manner.
+1. First, IDENTIFY key attributes of the company and the user-preferred keywords ({preferred_keywords}) that will serve as the foundation for your domain name suggestions.
+2. ENSURE each domain name you develop is MEMORABLE by choosing SIMPLE and CATCHY names that are easy to spell and recall.
+3. Prioritize BREVITY by generating domain names that are SHORT and UNCOMPLICATED, facilitating quick recognition and ease of use.
+4. INCORPORATE the provided KEYWORDS seamlessly into each domain name to enhance search engine optimization (SEO) and relevance.
+5. CONDUCT a SEARCH to VERIFY that your suggested domain names do not violate any trademarks, thus ensuring they are legally sound.
+6. For every domain name you create, ASSIGN an appropriate DOMAIN EXTENSION such as .com, .net, or .org that aligns with the company's image and purpose.
+7. Think about LONG-TERM GROWTH when selecting a domain name, making sure it allows for FUTURE EXPANSION without restrictions.
+8. AVOID including hyphens and numbers in your domain names to maintain simplicity unless they are integral to the brand.
 
-                  2. Next, After the user enters their (genre{preferred_genre}).Use this information in the next step.
-
-                  3. Then, COMPARE the user's preferred genre with your categorized list to IDENTIFY potential book matches.
-
-                  4. After that, SELECT a variety of titles from the matched list that you believe will best suit the user's genre taste.
-
-                  5. Now, PRESENT these recommendations to the user in an organized manner, perhaps by ranking them or grouping similar titles together.
-                   
-                  Follow these steps thoroughly and after that display the recommendation.
-                   """
+For EACH GENERATED DOMAIN NAME, IMMEDIATELY SPECIFY a matching DOMAIN EXTENSION and a DESCRIPTION before proceeding to generate the next one.
+Display ALL these in a organized TABULAR format."""
     response = rag.chat(prompt)
     return response.response
 
 # File upload widget
-uploaded_file = st.file_uploader("Upload your book list here⬇️", type=["pdf", "docx"])
+uploaded_file = st.file_uploader("Upload your company details here⬇️", type=["pdf", "docx"])
 
 # If a file is uploaded
 if uploaded_file is not None:
@@ -106,11 +103,11 @@ if uploaded_file is not None:
     st.success("File successfully saved")
 
     # Get preferred genre after file upload
-    preferred_genre = st.text_input("Enter your preferred genre")
+    preferred_keywords = st.text_input("Enter your preferred keyword")
 
     # Generate advice button
-    if st.button("Get Recommendation"):
-        automatic_response = advisor_response(file_path, preferred_genre)
+    if st.button("Generate"):
+        automatic_response = Chatbot_response(file_path, preferred_keywords)
         st.markdown(automatic_response)
 
 # Footer or any additional information
